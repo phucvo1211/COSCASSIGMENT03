@@ -1,53 +1,51 @@
 ﻿namespace Assignment03;
 
+using System;
+using System.Collections.Generic;
+
+using System;
+using System.Collections.Generic;
+
 public class AdjListGraph : IAdjustListGraph
 {
-    private Dictionary<int, List<int>> adjList;
+    private Dictionary<int, AdjListNode> adjList; // Adjacency list represented by a dictionary
 
     public AdjListGraph()
     {
-        adjList = new Dictionary<int, List<int>>();
-    }
-    
-    public void AddEdge(int src, int dest)
-    {
-        if (!adjList.ContainsKey(src))
-        {
-            Console.WriteLine($"Node {src} does not exist.");
-            return;
-        }
-
-        if (!adjList.ContainsKey(dest))
-        {
-            Console.WriteLine($"Node {dest} does not exist.");
-            return;
-        }
-        adjList[src].Add(dest);
-        adjList[dest].Add(src);
+        adjList = new Dictionary<int, AdjListNode>();
     }
 
+    // Adds a node to the graph
     public void AddNode(AdjListNode node)
     {
-        if (!adjList.ContainsKey(node.Data))
-        {
-            adjList[node.Data] = new List<int>();
-        }
-        else
-        {
-            Console.WriteLine($"Node {node.Data} already exists.");
-        }
+        adjList[node.Id] = node;
     }
 
+    // Adds an edge from src to dest
+    public void AddEdge(int src, int dest)
+    {
+        if (!adjList.ContainsKey(src) || !adjList.ContainsKey(dest))
+        {
+            Console.WriteLine("Invalid edge: Either source or destination node does not exist.");
+            return;
+        }
+        adjList[src].AddEdge(dest);
+    }
+
+    // Displays the adjacency list of the graph
     public void DisplayAdjlist()
     {
-        foreach (var kvp in adjList)
+        foreach (var node in adjList)
         {
-            Console.Write($"{kvp.Key}: ");
-            foreach (var neighbor in kvp.Value)
+            Console.Write($"{node.Value.Name} -> ");
+            for (int i = 0; i < node.Value.Edges.Count; i++)
             {
-                Console.Write($"{neighbor} ");
+                Console.Write($"{node.Value.Name}-{adjList[node.Value.Edges[i]].Name}");
+                if (i < node.Value.Edges.Count - 1)
+                    Console.Write(" "); // Use space instead of tab between edges
             }
             Console.WriteLine();
         }
     }
 }
+
