@@ -15,7 +15,7 @@ AdjListNode G = new AdjListNode(6, "G");
 AdjListNode H = new AdjListNode(7, "H");
 AdjListNode I = new AdjListNode(8, "I");
 
-// Add nodes to the graph
+// Adding nodes to graph
 graph.AddNode(A);
 graph.AddNode(B);
 graph.AddNode(C);
@@ -41,5 +41,4 @@ graph.AddEdge(6, 7); // G -> H
 graph.AddEdge(7, 8); // H -> I
 graph.AddEdge(8, 5); // I -> F
 
-// Display the adjacency list
 graph.DisplayAdjlist();

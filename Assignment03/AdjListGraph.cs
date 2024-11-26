@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 public class AdjListGraph : IAdjustListGraph
 {
-    private Dictionary<int, AdjListNode> adjList; // Adjacency list represented by a dictionary
+    private Dictionary<int, AdjListNode> adjList; 
 
     public AdjListGraph()
     {
